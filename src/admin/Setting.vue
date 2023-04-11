@@ -35,6 +35,8 @@
 					<option value="">Seleccionar Opción</option>
 					<v-options store="vehicle" display-field="plate" value-field="plate" />
 				</v-select>
+				<label>Viaje:</label>
+				<v-number v-model="o.travel"/>
 				<v-button icon="fa fa-save" value="Guardar Seleccion" @click="save"
 					style="margin-top:10px;width:-webkit-fill-available;" />
 

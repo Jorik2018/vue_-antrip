@@ -263,8 +263,9 @@ export default ui({
 				try {
 					
 					if(!location.plate){
-						var plate = JSON.parse(localStorage.getItem("setting")).vehicle;
-						location.plate = plate;
+						let setting=JSON.parse(localStorage.getItem("setting"));
+						location.plate = setting.vehicle;
+						location.travel = setting.travel;
 					}
 					if(!location.time){
 						location.time = 1*new Date();

@@ -10,6 +10,15 @@
                 </div>
                 <template v-else>
                     <div>{{o.plate}}</div>
+					<div v-if="o.travel" style="    float: right;
+    width: 50%;
+    top: 10px;
+    position: absolute;
+    right: 0px;">
+					
+						<label>Viaje:</label>
+						<div>{{o.travel}}</div>
+					</div>
                     <label>Activar Tracking por GPS</label>
                     <v-switch class="v-switch" v-model="app.tracking" />
                     <v-button @click="app.guess(1000)" style="margin-top:10px" 
@@ -36,7 +45,7 @@
 export default window._.ui({
     data(){return {
         started:Date.now(),
-        o:{plate:null}
+        o:{plate:null,travel:1}
     }},
     computed:{
         locations(){return this.app.locations;}
@@ -46,8 +55,11 @@ export default window._.ui({
         app.title='Administración';
         app.bindLinks(me.$el);
         me.o.tracking=!!app.watcher;
-		let vehicle=localStorage.getItem('setting');
-		if(vehicle)me.o.plate=JSON.parse(vehicle).vehicle;
+		let setting=localStorage.getItem('setting');
+		if(setting){
+			me.o.plate=JSON.parse(setting).vehicle;
+			me.o.travel=JSON.parse(setting).travel;
+		}
         me.changeRoute();
         /*window.axios.post('asasas',{},{error(){alert(22)},mask(){alert('mask')}}).then(function(r){
             console.log(r);
